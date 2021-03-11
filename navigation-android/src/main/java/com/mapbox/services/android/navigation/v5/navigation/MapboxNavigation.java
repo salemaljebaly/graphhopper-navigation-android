@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -764,5 +765,9 @@ public class MapboxNavigation implements ServiceConnection {
         Timber.d("Disconnected from service.");
         navigationService = null;
         isBound = false;
+    }
+
+    public void updateOptions(Function<MapboxNavigationOptions.Builder, MapboxNavigationOptions> optionsBuilder) {
+        options = optionsBuilder.apply(options.toBuilder());
     }
 }
