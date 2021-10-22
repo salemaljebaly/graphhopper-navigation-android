@@ -71,5 +71,4 @@ dependencies {
 
 apply from: 'javadoc.gradle'
 apply from: "${rootDir}/gradle/checkstyle.gradle"
-apply from: "${rootDir}/gradle/jacoco.gradle"
 apply from: "${rootDir}/gradle/dependency-updates.gradle"

@@ -10,7 +10,9 @@ import com.mapbox.api.directions.v5.models.LegStep;
 import com.mapbox.api.directions.v5.models.RouteLeg;
 import com.mapbox.api.directions.v5.models.RouteOptions;
 import com.mapbox.api.directions.v5.models.VoiceInstructions;
+import com.mapbox.core.constants.Constants;
 import com.mapbox.core.utils.TextUtils;
+import com.mapbox.geojson.LineString;
 import com.mapbox.geojson.Point;
 import com.mapbox.services.android.navigation.v5.milestone.BannerInstructionMilestone;
 import com.mapbox.services.android.navigation.v5.milestone.Milestone;
@@ -72,9 +74,10 @@ public class RouteUtils {
    * @since 0.7.0
    */
   public boolean isNewRoute(@Nullable RouteProgress previousRouteProgress,
-                            @NonNull DirectionsRoute directionsRoute) {
-    return previousRouteProgress == null || !previousRouteProgress.directionsRoute().geometry()
-      .equals(directionsRoute.geometry());
+          @NonNull DirectionsRoute directionsRoute) {
+      return previousRouteProgress == null ||
+              !(previousRouteProgress.directionsRoute().geometry().equals(directionsRoute.geometry()) &&
+                      LineString.fromPolyline(directionsRoute.geometry(), Constants.PRECISION_6).coordinates().size() > 1);
   }
 
   /**
