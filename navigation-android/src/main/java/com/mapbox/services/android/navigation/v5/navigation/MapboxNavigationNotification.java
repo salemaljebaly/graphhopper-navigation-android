@@ -148,7 +148,7 @@ class MapboxNavigationNotification implements NavigationNotification {
     PackageManager pm = context.getPackageManager();
     Intent intent = pm.getLaunchIntentForPackage(context.getPackageName());
     intent.setPackage(null);
-    return PendingIntent.getActivity(context, 0, intent, 0);
+    return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
   }
 
   private void registerReceiver(Context context) {
@@ -241,7 +241,7 @@ class MapboxNavigationNotification implements NavigationNotification {
 
   private PendingIntent createPendingCloseIntent(Context context) {
     Intent endNavigationBtn = new Intent(END_NAVIGATION_ACTION);
-    return PendingIntent.getBroadcast(context, 0, endNavigationBtn, 0);
+    return PendingIntent.getBroadcast(context, 0, endNavigationBtn, PendingIntent.FLAG_IMMUTABLE);
   }
 
   private void onEndNavigationBtnClick() {
